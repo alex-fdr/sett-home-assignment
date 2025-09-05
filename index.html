@@ -1,13 +1,40 @@
 <!doctype html>
 <html lang="en">
-  <head>
+
+<head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0 user-scalable=no" />
     <title>Sett.ai test exercise</title>
-  </head>
-  <body>
+    <link rel="stylesheet" href="src/style.css">
+</head>
+
+<body>
     <div id="app"></div>
+
+    <div class="screens" id="screens">
+        <div class="loading screen shown" id="loading">
+            <img class="game-logo" id="game-logo" src="./logo.png" alt="game icon" />
+            <div id="spinner" class="">
+                <div id="spinner-dot"></div>
+                <div class="spinner-arc" id="spinner-inner-arc"></div>
+                <div class="spinner-arc" id="spinner-middle-arc"></div>
+                <div class="spinner-arc" id="spinner-outer-arc"></div>
+            </div>
+        </div>
+
+        <div class="menu screen hidden" id="menu">
+            <button id="start-game-button">
+                Start
+            </button>
+        </div>
+
+        <div class="gameplay screen hidden" id="gameplay">
+            <p id="level">
+                Level 1
+            </p>
+        </div>
+    </div>
+
     <script type="module" src="/src/main.ts"></script>
-  </body>
+</body>
 </html>

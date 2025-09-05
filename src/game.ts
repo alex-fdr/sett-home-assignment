@@ -1,5 +1,6 @@
 import { AmbientLight, DirectionalLight, PerspectiveCamera, Scene, WebGLRenderer } from 'three';
 import { ResizeHelper } from './helpers/resize-helper';
+import { UISystem } from './systems/ui';
 
 export type GameOptions = {
     width: number;
@@ -13,6 +14,7 @@ export class Game {
     public resizer: ResizeHelper;
     public ambientLight: AmbientLight;
     public directionalLight: DirectionalLight;
+    public ui: UISystem;
 
     constructor({ width, height }: GameOptions) {
         this.scene = this.addScene();
@@ -21,6 +23,10 @@ export class Game {
         this.ambientLight = this.addAmbientLight(this.scene);
         this.directionalLight = this.addDirectionalLight(this.scene);
         this.resizer = new ResizeHelper(this.camera, this.renderer);
+        this.ui = new UISystem();
+
+        this.ui.addScreen('loading');
+        this.ui.addScreen('gameplay');
     }
 
     private addScene(): Scene {
@@ -64,6 +70,9 @@ export class Game {
     public start(): void {
         this.resizer.init();
         this.renderer.setAnimationLoop(this.update.bind(this));
+        
+        this.ui.hide('loading');
+        this.ui.show('gameplay');
     }
 
     public update(): void {

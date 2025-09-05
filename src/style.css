@@ -14,9 +14,153 @@
 }
 
 body {
+    position: relative;
+    overflow: hidden;
     margin: 0;
-    display: flex;
-    place-items: center;
     min-width: 320px;
     min-height: 100vh;
+}
+
+.abs {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+}
+
+.screens {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.screen {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+}
+
+.shown {
+    display: flex;
+    visibility: visible;
+    opacity: 1;
+    transition: opacity 0.2s ease-in, visibility 0.2s ease-in;
+}
+
+.hiding {
+    /* display: none; */
+    visibility: hidden;
+    opacity: 0;
+    /* animation: fadeout 0.5s 1 ease normal none; */
+    transition: opacity 0.3s ease-out, visibility 0.3s ease-out;
+}
+
+.hidden {
+    display: none;
+}
+
+/* .overlay {
+    background: rgba(0, 0, 0, 0.7);
+} */
+
+#game-logo {
+    width: 10rem;
+    border-radius: 3vh;
+    margin-bottom: 2rem;
+}
+
+#spinner {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 4rem;
+    height: 4rem;
+    margin-bottom: 2rem;
+}
+
+#spinner-dot {
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 50%;
+    box-sizing: border-box;
+    background-color: #fff;
+}
+
+#spinner-inner-arc {
+    width: 1.5rem;
+    height: 1.5rem;
+    border-color: #fff #fff transparent;
+    animation: rotation 2s 0s linear infinite;
+}
+
+#spinner-middle-arc {
+    width: 2.75rem;
+    height: 2.75rem;
+    border-color: #fff #fff transparent;
+    animation: rotation 2s 0s linear infinite reverse;
+}
+
+#spinner-outer-arc {
+    width: 4rem;
+    height: 4rem;
+    border-color: #fff #fff transparent;
+    animation: rotation 2s -0.5s linear infinite;
+}
+
+.spinner-arc {
+    position: absolute;
+    border-radius: 50%;
+    box-sizing: border-box;
+    border: 2px solid;
+}
+
+@keyframes rotation {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes rotationBack {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(-360deg);
+    }
+}
+
+
+@keyframes fadein {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeout {
+    from {
+        opacity: 1;
+    }
+
+    to {
+        opacity: 0;
+    }
 }
