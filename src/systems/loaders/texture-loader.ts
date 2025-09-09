@@ -37,13 +37,12 @@ export class TextureLoader {
         });
     }
 
-    get(key: string, props: TextureProps) {
-        const {
-            clone = false,
-            flipY = false,
-            repeatX = 0,
-            repeatY = repeatX,
-        } = props;
+    get(key: string, {
+        clone = false, 
+        flipY = false, 
+        repeatX = 0, 
+        repeatY = repeatX
+    }: Partial<TextureProps> = {}) {
 
         let texture = this.storage[key];
         texture = clone ? texture.clone() : texture;

@@ -1,16 +1,21 @@
 import { AnimationAction, AnimationClip, AnimationMixer, LoopRepeat } from 'three';
-import { Entity, type EntityProps } from './entity';
+import { Entity, type EntityProps } from '../entity';
 
 type Actions = {
     idle: AnimationAction;
     action: AnimationAction;
 };
 
+export type AnimalProps = EntityProps & {
+    kind: 'cow' | 'sheep' | 'chicken'
+}
+
 export class Animal extends Entity {
     private mixer: AnimationMixer;
     private actions: Actions;
+    public static kinds: AnimalProps['kind'][] = ['cow', 'sheep', 'chicken'];
 
-    constructor(props: EntityProps) {
+    constructor(props: AnimalProps) {
         super(props);
 
         this.mixer = new AnimationMixer(this.model);
@@ -20,6 +25,13 @@ export class Animal extends Entity {
             idle: this.createAnimationAction('idle'),
             action: this.createAnimationAction('action'),
         };
+
+        console.log(this.actions)
+    }
+
+    public static getRandomKind(): AnimalProps['kind'] {
+        const index = Math.floor(Math.random() * Animal.kinds.length);
+        return Animal.kinds[index];
     }
 
     private createAnimationAction(name: keyof Actions): AnimationAction {

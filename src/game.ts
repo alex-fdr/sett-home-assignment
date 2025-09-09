@@ -37,7 +37,9 @@ export class Game {
         this.level = new Level(this, this.scene, this.camera);
 
         this.ui.addScreen('loading');
-        // this.ui.addScreen('gameplay');
+        this.ui.addScreen('gameplay');
+        this.ui.addScreen('choice-animals');
+        this.ui.addScreen('choice-plants');
     }
 
     private addScene(): Scene {

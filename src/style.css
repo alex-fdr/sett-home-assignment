@@ -49,24 +49,6 @@ body {
     position: absolute;
 }
 
-.shown {
-    display: flex;
-    visibility: visible;
-    opacity: 1;
-    transition: opacity 0.2s ease-in, visibility 0.2s ease-in;
-}
-
-.hiding {
-    /* display: none; */
-    visibility: hidden;
-    opacity: 0;
-    /* animation: fadeout 0.5s 1 ease normal none; */
-    transition: opacity 0.3s ease-out, visibility 0.3s ease-out;
-}
-
-.hidden {
-    display: none;
-}
 
 /* .overlay {
     background: rgba(0, 0, 0, 0.7);
@@ -145,22 +127,78 @@ body {
 }
 
 
+.choice-list {
+    display: flex;
+    background: #eee;
+    padding: 1rem;
+    border: 2px solid #ccc;
+    border-top-left-radius: 1rem;
+    border-top-right-radius: 1rem;
+    border-bottom: none;
+    bottom: 0;
+    position: absolute;
+}
+
+.choice-card {
+    width: 8rem;
+    max-width: min(25vw, 25vh);
+    padding: min(2vw, 2vh);
+    margin: min(2vw, 2vh);
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    /* border-right-width: 0px; */
+    border-radius: 1rem;
+    background-size: contain;
+    background-color: #ccc;
+    cursor: pointer;
+    pointer-events: all;
+}
+
+.choice-card:first-child {
+    /* border-top-left-radius: 1rem;
+    border-bottom-left-radius: 1rem; */
+}
+
+.choice-card:last-child {
+    /* border-top-right-radius: 1rem;
+    border-bottom-right-radius: 1rem;
+    border-right-width: 2px; */
+}
+
+
 @keyframes fadein {
     from {
+        display: none;
         opacity: 0;
     }
 
     to {
+        display: flex;
         opacity: 1;
     }
 }
 
 @keyframes fadeout {
     from {
+        display: flex;
         opacity: 1;
     }
 
     to {
+        display: none;
         opacity: 0;
     }
+}
+
+
+.shown {
+    animation: fadein 0.2s ease-in forwards;
+}
+
+.hiding {
+    animation: fadeout 0.15s ease-out forwards;
+}
+
+.hidden {
+    display: none;
 }

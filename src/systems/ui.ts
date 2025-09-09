@@ -9,26 +9,54 @@ export class UISystem {
         const screen = document.getElementById(id);
 
         if (!screen) {
-            return;
+            throw new Error(`no element with id=${name} found`);
         }
 
         this.domElements[id] = screen;
 
         // a hack for smooth animation of display:none prorepty
-        screen.addEventListener('transitionend', () => {
+        screen.addEventListener('animationend', () => {
             if (screen.classList.contains('hiding')) {
                 screen.classList.replace('hiding', 'hidden');
             }
-        });
+        })
     }
 
     public show(name: string): void {
         console.log('show screen:', name);
-        this.domElements[name]?.classList.replace('hidden', 'shown');
+        const screen = this.getScreen(name);
+        screen.classList.replace('hidden', 'shown');
     }
 
     public hide(name: string): void {
         console.log('hide screen:', name);
-        this.domElements[name]?.classList.replace('shown', 'hiding');
+        const screen = this.getScreen(name);
+        screen.classList.replace('shown', 'hiding');
+    }
+
+    public setEventHandler(name: string, event: keyof HTMLElementEventMap, callback: Function, children = false): void {
+        const element = document.getElementById(name);
+        
+        if (!element) {
+            throw new Error(`no element with id=${name} found`);
+        }
+
+        if (children && element.children) {
+            for (const item of element.children) {
+                item.addEventListener(event, () => callback(item.id));
+            }
+        } else {
+            element.addEventListener(event, () => callback(element.id));
+        }
+    }
+
+    private getScreen(name: string): HTMLElement {
+        const element = this.domElements[name];
+
+        if (!element) {
+            throw new Error(`no screen with id=${name} found`);
+        }
+
+        return element;
     }
 }
