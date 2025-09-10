@@ -7,31 +7,27 @@ type Actions = {
 };
 
 export type AnimalProps = EntityProps & {
-    kind: 'cow' | 'sheep' | 'chicken'
-}
+    kind: 'cow' | 'sheep' | 'chicken';
+};
+
+export type AnimalKind = AnimalProps['kind'];
 
 export class Animal extends Entity {
     private mixer: AnimationMixer;
     private actions: Actions;
-    public static kinds: AnimalProps['kind'][] = ['cow', 'sheep', 'chicken'];
+    public animations: AnimationClip[];
+    public static kinds: AnimalKind[] = ['cow', 'sheep', 'chicken'];
 
     constructor(props: AnimalProps) {
         super(props);
 
+        this.animations = this.game.assets.models.getAnimations('objects', this.kind);
         this.mixer = new AnimationMixer(this.model);
-        this.animations = this.animations.filter((anim) => anim.name.includes(this.kind));
 
         this.actions = {
             idle: this.createAnimationAction('idle'),
             action: this.createAnimationAction('action'),
         };
-
-        console.log(this.actions)
-    }
-
-    public static getRandomKind(): AnimalProps['kind'] {
-        const index = Math.floor(Math.random() * Animal.kinds.length);
-        return Animal.kinds[index];
     }
 
     private createAnimationAction(name: keyof Actions): AnimationAction {
@@ -45,7 +41,6 @@ export class Animal extends Entity {
         action.timeScale = 1;
         action.clampWhenFinished = true;
         action.setLoop(LoopRepeat, Infinity);
-
         return action;
     }
 

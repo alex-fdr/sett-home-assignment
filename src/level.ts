@@ -1,11 +1,9 @@
-import { Group, Sprite, SpriteMaterial, Vector3, type Object3D, type PerspectiveCamera } from 'three';
 import type { Game } from './game';
-import type { EntityProps } from './entities/entity';
+import { Group, Vector3, type Object3D, type PerspectiveCamera } from 'three';
 import { Ground } from './entities/ground';
-import { Animal, type AnimalProps } from './entities/spawn/animal';
 import { RaycasterHelper } from './systems/raycaster';
-import { Icon } from './entities/icon';
-import { Plant, type PlantProps } from './entities/spawn/plant';
+import { Choices } from './systems/choices';
+import { GardenUnit } from './garden-unit';
 
 export class Level {
     public parent: Object3D;
@@ -13,8 +11,9 @@ export class Level {
     public game: Game;
     public group: Group;
     public ground!: Ground;
-    public animals!: Animal[];
     public raycaster: RaycasterHelper;
+    public choices: Choices;
+    public gardenUnits: GardenUnit[];
 
     constructor(game: Game, parent: Object3D, camera: PerspectiveCamera) {
         this.game = game;
@@ -27,46 +26,26 @@ export class Level {
 
         this.raycaster = new RaycasterHelper(this.camera, this.game.renderer);
 
-        this.animals = [];
+        this.gardenUnits = [];
+        this.choices = new Choices();
     }
 
     public init(): void {
         this.raycaster.init();
-
-        // const props: Omit<EntityProps, 'kind'> = {
-        //     game: this.game,
-        //     parent: this.group,
-        // };
-
+       
         this.addGround();
-        this.addInteractiveIcons();
-
-        // this.animals = [
-        //     new Animal({
-        //         ...props,
-        //         kind: 'chicken',
-        //     }),
-        // //     new Animal({
-        // //         ...props,
-        // //         kind: 'cow',
-        // //     }),
-        // //     new Animal({
-        // //         ...props,
-        // //         kind: 'cow',
-        // //     })
-        // ];
-
-        // this.animals[0].model.position.set(0, 4.2, -3);
-        // // this.animals[1].model.position.set(4, 4.2, -3);
-        // // this.animals[2].model.position.set(-4, 4.2, -3);
-
-        // for (const animal of this.animals) {
-        //     animal.animate('idle');
-        // }
-
+        this.addGardenAnimalsUnit();
+        this.addGardenPlantsUnit();
+     
     }
 
-    addGround() {
+    public update(deltaTime: number): void {
+        for (const unit of this.gardenUnits) {
+            unit.update(deltaTime);
+        }
+    }
+
+    private addGround(): void {
         this.ground = new Ground({
             game: this.game,
             parent: this.group,
@@ -74,70 +53,39 @@ export class Level {
         });
     }
 
-    addInteractiveIcons() {
-        const plus = new Icon({ 
-            texture: this.game.assets.textures.get('plus', { flipY: true }),
-            scaleFactor: 2,
-            position: new Vector3(-2, 12, 0),
-            parent: this.group,
-        });
-
-        const plus2 = new Icon({ 
-            texture: this.game.assets.textures.get('plus', { flipY: true }),
-            scaleFactor: 2,
-            position: new Vector3(2, 12, 0),
-            parent: this.group,
-        });
-
-        plus.setInputHandler(() => {
-            this.game.ui.show('choice-animals');
-            this.game.ui.hide('choice-plants');
-        }, this.raycaster);
-
-        plus2.setInputHandler(() => {
-            this.game.ui.show('choice-plants');
-            this.game.ui.hide('choice-animals');
-        }, this.raycaster);
-
-        this.game.ui.setEventHandler('choice-animals', 'pointerdown', (id: string) => {
-            this.addAnimal(id as AnimalProps['kind']);
-            this.game.ui.hide('choice-animals');
-        }, true);
-
-        this.game.ui.setEventHandler('choice-plants', 'pointerdown', (id: string) => {
-            this.addPlant(id as PlantProps['kind']);
-            this.game.ui.hide('choice-plants');
-        }, true);
-    }
-
-    addAnimal(kind: AnimalProps['kind']): void {
-        console.log('add animal:', kind);
-
-        const animal = new Animal({
+    private addGardenAnimalsUnit(): void {
+        const gardenAnimals = new GardenUnit({
             game: this.game,
             parent: this.group,
-            kind,
-            position: new Vector3(Math.random() * 10 - 5, 4.2, Math.random() * 10 - 5),
+            choiceVariant: 'choice-animals',
+            level: this,
+            iconPosition: new Vector3(-2, 10, 0),
+            slotsPositions: [
+                new Vector3(-3, 4.25, 0),
+                new Vector3(-1, 4.25, 0),
+                new Vector3(1, 4.25, 0),
+                new Vector3(3, 4.25, 0),
+            ],
         });
-        animal.model.rotateOnWorldAxis(new Vector3(0, 1, 0), Math.random() * 2 - 1);
-        animal.animate('idle');
-        this.animals.push(animal);
+
+        this.gardenUnits.push(gardenAnimals);
     }
 
-    addPlant(kind: PlantProps['kind']): void {
-        console.log('add plant');
-
-        const plant = new Plant({
+    private addGardenPlantsUnit(): void {
+        const gardenPlants = new GardenUnit({
             game: this.game,
             parent: this.group,
-            kind,
-            position: new Vector3(Math.random() * 10 - 5, 4.2, Math.random() * 10 - 5),
+            choiceVariant: 'choice-plants',
+            level: this,
+            iconPosition: new Vector3(2, 10, 0),
+            slotsPositions: [
+                new Vector3(-3, 4.25, -3),
+                new Vector3(-1, 4.25, -3),
+                new Vector3(1, 4.25, -3),
+                new Vector3(3, 4.25, -3),
+            ],
         });
-    }
 
-    public update(deltaTime: number): void {
-        for (const animal of this.animals) {
-            animal.update(deltaTime);
-        }
+        this.gardenUnits.push(gardenPlants);
     }
 }

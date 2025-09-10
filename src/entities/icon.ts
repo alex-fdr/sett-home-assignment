@@ -1,5 +1,5 @@
 import type { RaycasterHelper } from 'src/systems/raycaster';
-import { Object3D, Sprite, SpriteMaterial, Texture, Vector3, type SpriteMaterialParameters } from 'three';
+import { Object3D, Sprite, SpriteMaterial, Texture, Vector3 } from 'three';
 
 export abstract class InteractiveSprite extends Sprite {
     public inputHandler!: Function;

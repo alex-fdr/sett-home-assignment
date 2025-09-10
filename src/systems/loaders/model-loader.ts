@@ -65,7 +65,12 @@ export class ModelLoader {
         return this.storage[key].animations[index]
     }
 
-    getAnimations(key: string) {
-        return this.storage[key].animations;
+    getAnimations(key: string, commonNamePart?: string) {
+        const list = this.storage[key].animations;
+        return commonNamePart 
+            ? list.filter(anim => anim.name.includes(commonNamePart))
+            : list;
+
+        // return this.storage[key].animations;
     }
 }
