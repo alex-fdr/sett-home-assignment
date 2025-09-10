@@ -6,6 +6,8 @@ import type { Level } from './level';
 import { Animal, type AnimalKind } from './entities/spawn/animal';
 import { Plant, type PlantKind } from './entities/spawn/plant';
 import { Slot } from './entities/slot';
+import { gsap } from 'gsap';
+import type { Entity } from './entities/entity';
 
 type GardenUnitProps = {
     game: Game;
@@ -81,7 +83,6 @@ export class GardenUnit {
                 this.addPlant(kind as PlantKind, slot);
             }
         }
-
     }
 
     public update(deltaTime: number): void {
@@ -103,6 +104,8 @@ export class GardenUnit {
         animal.animate('idle');
 
         this.updateable.push(animal);
+
+        this.animateEntityAppearence(animal);
     }
 
     private addPlant(kind: PlantKind, parent: Slot): void {
@@ -115,6 +118,19 @@ export class GardenUnit {
             parent,
             kind,
         });
+
+        this.animateEntityAppearence(plant);
     }
 
+    private animateEntityAppearence(entity: Entity) {
+        gsap.fromTo(entity.model.scale, {
+            x: 0.5,
+            y: 0.5,
+        }, {
+            x: 1,
+            y: 1,
+            duration: 0.4,
+            ease: 'back',
+        });
+    }
 }
