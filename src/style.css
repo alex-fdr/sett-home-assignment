@@ -18,7 +18,7 @@ body {
     overflow: hidden;
     margin: 0;
     min-width: 320px;
-    min-height: 100vh;
+    min-height: 100dvh;
 }
 
 .abs {
@@ -45,7 +45,7 @@ body {
     align-items: center;
     justify-content: center;
     width: 100vw;
-    height: 100vh;
+    height: 100dvh;
     position: absolute;
 }
 
@@ -250,8 +250,8 @@ body {
     background-repeat: no-repeat;
     width: 10vmax;
     height: 12.5vmax;
-    top: 68vmax;
-    left: 47vmin;
+    top: 68dvmax;
+    left: 47dvmin;
     /* background-size: 1691%; */
 }
 
