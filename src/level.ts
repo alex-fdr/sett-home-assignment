@@ -4,6 +4,7 @@ import { Ground } from './entities/ground';
 import { RaycasterHelper } from './systems/raycaster';
 import { Choices } from './systems/choices';
 import { GardenUnit } from './entities/garden-unit';
+import { gsap } from 'gsap';
 
 export class Level {
     public parent: Object3D;
@@ -42,6 +43,16 @@ export class Level {
     public update(deltaTime: number): void {
         for (const unit of this.gardenUnits) {
             unit.update(deltaTime);
+        }
+    }
+
+    public finish() {
+        for (const { icon } of this.gardenUnits) {
+            gsap.to(icon.material, {
+                opacity: 0,
+                duration: 0.5,
+                ease: 'sine.out',
+            })
         }
     }
 

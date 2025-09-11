@@ -40,6 +40,7 @@ export class Game {
         this.ui.addScreen('loading');
         this.ui.addScreen('menu');
         this.ui.addScreen('gameplay');
+        this.ui.addScreen('end');
 
         this.handleInput();
     }
@@ -100,10 +101,21 @@ export class Game {
         this.level.init();
     }
 
+    public finish(): void {
+        this.level.finish();
+        this.ui.hide('gameplay');
+        this.ui.show('end');
+        this.ui.particles.generate();
+    }
+
     public handleInput() {
         this.ui.setEventHandler('start-game-button', 'pointerdown', () => {
             this.start();
         });
+
+        this.ui.setEventHandler('finish-game-button', 'pointerdown', () => {
+            this.finish();
+        })
     }
 
     public update(): void {

@@ -1,8 +1,11 @@
+import { Particles } from './particles';
+
 export class UISystem {
-    private domElements: Record<string, HTMLElement> = {};
+    private screens: Record<string, HTMLElement> = {};
+    public particles: Particles;
 
     constructor() {
-        
+        this.particles = new Particles(200);
     }
 
     public addScreen(id: string): void {
@@ -12,7 +15,7 @@ export class UISystem {
             throw new Error(`no element with id=${name} found`);
         }
 
-        this.domElements[id] = screen;
+        this.screens[id] = screen;
 
         // a hack for smooth animation of display:none prorepty
         screen.addEventListener('animationend', () => {
@@ -34,6 +37,16 @@ export class UISystem {
         screen.classList.replace('shown', 'hiding');
     }
 
+    public showElement(name: string): void {
+        const element = this.getElement(name);
+        element.classList.replace('hidden', 'shown');
+    }
+
+    public hideElement(name: string): void {
+        const element = this.getElement(name);
+        element.classList.replace('shown', 'hiding');
+    }
+
     public setEventHandler(name: string, event: keyof HTMLElementEventMap, callback: Function): void {
         const element = document.getElementById(name);
         
@@ -45,10 +58,20 @@ export class UISystem {
     }
 
     private getScreen(name: string): HTMLElement {
-        const element = this.domElements[name];
+        const element = this.screens[name];
 
         if (!element) {
             throw new Error(`no screen with id=${name} found`);
+        }
+
+        return element;
+    }
+
+    private getElement(name: string): HTMLElement {
+        const element = document.getElementById(name);
+        
+        if (!element) {
+            throw new Error(`no element with id=${name} found`);
         }
 
         return element;

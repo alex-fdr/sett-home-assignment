@@ -55,6 +55,7 @@ body {
     opacity: 0.5;
 }
 
+
 #game-logo {
     width: 10rem;
     border-radius: 3vh;
@@ -261,6 +262,7 @@ body {
     text-shadow: 2px 2px 0px #413bb2;
     box-shadow: 2px 4px 0px #413bb2;
     /* margin-top: min(20vh, 20vw); */
+    cursor: pointer;
 }
 
 .menu {
@@ -273,9 +275,12 @@ body {
 .menu > .button {
     position: absolute;
     bottom: min(15vh, 30vw);
+}
+
+.pulse {
     animation: zoom-in 3s cubic-bezier(.17,.67,.69,1.22) forwards;
     animation-iteration-count: infinite;
-    animation-delay: 3s;
+    animation-delay: 1s;
 }
 
 .wrapper {
@@ -302,6 +307,58 @@ body {
     } */
 }
 
-.cta {
+.end > .overlay {
+    opacity: 0.7;
+}
+
+.finish {
+    bottom: 3rem;
     position: absolute;
+}
+
+.particles {
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+}
+
+.particle {
+    width: 64px;
+    height: 64px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    animation: fall-down 5s linear forwards infinite;
+}
+
+.particle-cow {
+    background-image: url('/particles/cow-particle.png');
+}
+
+.particle-sheep {
+    background-image: url('/particles/sheep-particle.png');
+}
+
+.particle-chicken {
+    background-image: url('/particles/chicken-particle.png');
+}
+
+.particle-corn {
+    background-image: url('/particles/corn-particle.png');
+}
+
+.particle-tomato {
+    background-image: url('/particles/tomato-particle.png');
+}
+
+@keyframes fall-down {
+    from {
+        top: -10vh;
+        rotate: 0deg;
+    }
+
+    to {
+        top: 100vh;
+        rotate: 720deg;
+    }
 }

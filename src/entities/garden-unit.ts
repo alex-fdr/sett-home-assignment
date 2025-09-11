@@ -28,6 +28,7 @@ export class GardenUnit {
     public parent: Object3D;
     public level: Level;
     public updateable: Animal[] = [];
+    public completed = false;
 
     constructor({ game, parent, level, slotsPositions, iconPosition, choiceVariant }: GardenUnitProps) {
         this.game = game;
@@ -66,6 +67,11 @@ export class GardenUnit {
         this.level.choices.setEventHandler(this.choiceVariant, 'pointerdown', (kind: EntityKind) => {
             this.spawnEntity(kind);
             this.level.choices.hide(this.level.choices.current);
+            this.completed = true;
+
+            if (this.level.gardenUnits.every(unit => unit.completed)) {
+                this.game.ui.showElement('finish-game-button');
+            }
         });
     }
 
