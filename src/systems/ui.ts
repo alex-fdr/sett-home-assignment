@@ -5,7 +5,7 @@ export class UISystem {
     public particles: ParticleSystem;
 
     constructor() {
-        this.particles = new ParticleSystem(200);
+        this.particles = new ParticleSystem(100);
     }
 
     public addScreen(id: string): void {
@@ -44,7 +44,12 @@ export class UISystem {
 
     public hideElement(name: string): void {
         const element = this.getElement(name);
-        element.classList.replace('shown', 'hiding');
+
+        if (element.classList.contains('show')) {
+            element.classList.replace('shown', 'hiding');
+        } else {
+            element.classList.add('hiding');
+        }
     }
 
     public setEventHandler(name: string, event: keyof HTMLElementEventMap, callback: Function): void {

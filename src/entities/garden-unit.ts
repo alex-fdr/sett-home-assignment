@@ -62,6 +62,7 @@ export class GardenUnit {
     public handleInput(): void {
         this.icon.setInputHandler(() => {
             this.level.choices.show(this.choiceVariant);
+            this.game.ui.hideElement('hint');
         }, this.level.raycaster);
 
         this.level.choices.setEventHandler(this.choiceVariant, 'pointerdown', (kind: EntityKind) => {
