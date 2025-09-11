@@ -266,7 +266,7 @@ body {
 }
 
 .menu {
-    background-image: url('/menu-background.jpg');
+    background-image: url('./assets/images/menu-background.jpg');
     background-size: cover;
     background-position: center center;
     animation-duration: 0.5s;
@@ -332,23 +332,23 @@ body {
 }
 
 .particle-cow {
-    background-image: url('/particles/cow-particle.png');
+    background-image: url('./assets/images/particles/cow-particle.png');
 }
 
 .particle-sheep {
-    background-image: url('/particles/sheep-particle.png');
+    background-image: url('./assets/images/particles/sheep-particle.png');
 }
 
 .particle-chicken {
-    background-image: url('/particles/chicken-particle.png');
+    background-image: url('./assets/images/particles/chicken-particle.png');
 }
 
 .particle-corn {
-    background-image: url('/particles/corn-particle.png');
+    background-image: url('./assets/images/particles/corn-particle.png');
 }
 
 .particle-tomato {
-    background-image: url('/particles/tomato-particle.png');
+    background-image: url('./assets/images/particles/tomato-particle.png');
 }
 
 @keyframes fall-down {

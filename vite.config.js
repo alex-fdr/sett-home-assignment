@@ -1,9 +1,16 @@
 import { defineConfig } from 'vite';
+import { viteSingleFile } from 'vite-plugin-singlefile';
 
 export default defineConfig({
-    // assetsInlineLimit: 1024000,
+    build: {
+        assetsInlineLimit: 40960000,
+    },
     assetsInclude: [
         '**/*.glb', 
-        '**/*.gltf'
+        '**/*.gltf',
     ],
+
+    plugins: [
+        viteSingleFile(),
+    ]
 });

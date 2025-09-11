@@ -1,9 +1,9 @@
 import type { AssetsData } from './systems/types';
 
-import modelGround from '/gltf/ground2.glb';
-import modelObjects from '/gltf/objects2.glb';
+import modelGround from './assets/models/ground2.glb';
+import modelObjects from './assets/models/objects2.glb';
 
-import texturePlus from '/plus3.png';
+import texturePlus from './assets/textures/plus.png';
 
 export const assetsList: AssetsData = {
     models: [
@@ -17,6 +17,9 @@ export const assetsList: AssetsData = {
         },
     ],
     textures: [
-        { key: 'plus', file: texturePlus },
+        { 
+            key: 'plus', 
+            file: texturePlus 
+        },
     ]
 };
