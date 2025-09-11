@@ -1,13 +1,13 @@
 import { Vector3, type Object3D } from 'three';
-import { Icon } from './entities/icon';
-import type { Game } from './game';
-import type { ChoiceVariant } from './systems/choices';
-import type { Level } from './level';
-import { Animal, type AnimalKind } from './entities/spawn/animal';
-import { Plant, type PlantKind } from './entities/spawn/plant';
-import { Slot } from './entities/slot';
+import { Icon } from './icon';
+import type { Game } from '../game';
+import type { ChoiceVariant } from '../systems/choices';
+import type { Level } from '../level';
+import { Animal, type AnimalKind } from './spawn/animal';
+import { Plant, type PlantKind } from './spawn/plant';
+import { Slot } from './slot';
 import { gsap } from 'gsap';
-import type { Entity } from './entities/entity';
+import type { Entity } from './entity';
 
 type GardenUnitProps = {
     game: Game;
@@ -45,7 +45,7 @@ export class GardenUnit {
     public addInteractiveIcon(position: Vector3): void {
         this.icon = new Icon({
             texture: this.game.assets.textures.get('plus', { flipY: true }),
-            scaleFactor: 2,
+            scaleFactor: 0.8,
             position,
             parent: this.parent,
         });

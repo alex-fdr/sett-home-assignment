@@ -34,20 +34,14 @@ export class UISystem {
         screen.classList.replace('shown', 'hiding');
     }
 
-    public setEventHandler(name: string, event: keyof HTMLElementEventMap, callback: Function, children = false): void {
+    public setEventHandler(name: string, event: keyof HTMLElementEventMap, callback: Function): void {
         const element = document.getElementById(name);
         
         if (!element) {
             throw new Error(`no element with id=${name} found`);
         }
 
-        if (children && element.children) {
-            for (const item of element.children) {
-                item.addEventListener(event, () => callback(item.id));
-            }
-        } else {
-            element.addEventListener(event, () => callback(element.id));
-        }
+        element.addEventListener(event, () => callback(element.id));
     }
 
     private getScreen(name: string): HTMLElement {

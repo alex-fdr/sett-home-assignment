@@ -5,6 +5,13 @@ const game = new Game({
     height: window.innerHeight,
 });
 
+const createTime = Date.now();
+
 window.addEventListener('load', () => {
-    game.start();
+    // a small delay so the loading animation can be seen
+    const waitTime = Math.max(Date.now() - createTime, 500);
+
+    setTimeout(() => {
+        game.load();
+    }, waitTime);
 })

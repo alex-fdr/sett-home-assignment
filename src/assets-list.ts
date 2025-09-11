@@ -3,10 +3,7 @@ import type { AssetsData } from './systems/types';
 import modelGround from '/gltf/ground2.glb';
 import modelObjects from '/gltf/objects2.glb';
 
-import texturePlus from '/plus.png';
-import textureCow from '/cow.png';
-import textureSheep from '/sheep.png';
-import textureChicken from '/chicken.png';
+import texturePlus from '/plus3.png';
 
 export const assetsList: AssetsData = {
     models: [
@@ -21,8 +18,5 @@ export const assetsList: AssetsData = {
     ],
     textures: [
         { key: 'plus', file: texturePlus },
-        { key: 'icon-cow', file: textureCow },
-        { key: 'icon-sheep', file: textureSheep },
-        { key: 'icon-chicken', file: textureChicken },
     ]
 };
