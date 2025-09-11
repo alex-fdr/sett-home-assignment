@@ -18,8 +18,8 @@ export class AssetsSystem {
             this.textures.loadAll(textures),
         ]);
 
-        console.log('MODELS:', this.models.storage);
-        console.log('TEXTURES:', this.textures.storage);
+        // console.log('MODELS:', this.models.storage);
+        // console.log('TEXTURES:', this.textures.storage);
     }
 }
 

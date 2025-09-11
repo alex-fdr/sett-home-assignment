@@ -1,18 +1,18 @@
 import { AnimationAction, AnimationClip, AnimationMixer, LoopRepeat } from 'three';
-import { Entity, type EntityProps } from '../entity';
+import { BaseEntity, type BaseEntityProps } from './base-entity';
 
 type Actions = {
     idle: AnimationAction;
     action: AnimationAction;
 };
 
-export type AnimalProps = EntityProps & {
+export type AnimalProps = BaseEntityProps & {
     kind: 'cow' | 'sheep' | 'chicken';
 };
 
 export type AnimalKind = AnimalProps['kind'];
 
-export class Animal extends Entity {
+export class Animal extends BaseEntity {
     private mixer: AnimationMixer;
     private actions: Actions;
     public animations: AnimationClip[];

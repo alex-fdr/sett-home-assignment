@@ -1,5 +1,5 @@
-import { AmbientLight, Clock, Color, DirectionalLight, Object3D, PerspectiveCamera, Scene, Vector3, WebGLRenderer } from 'three';
-import { ResizeHelper } from './helpers/resize-helper';
+import { AmbientLight, Clock, Color, DirectionalLight, PerspectiveCamera, Scene, Vector3, WebGLRenderer } from 'three';
+import { ResizeSystem } from './systems/resize';
 import { UISystem } from './systems/ui';
 import { AssetsSystem } from './systems/assets';
 import { assetsList } from './assets-list';
@@ -15,7 +15,7 @@ export class Game {
     public scene: Scene;
     public camera: PerspectiveCamera;
     public renderer: WebGLRenderer;
-    public resizer: ResizeHelper;
+    public resizer: ResizeSystem;
     public ambientLight: AmbientLight;
     public directionalLight: DirectionalLight;
     public ui: UISystem;
@@ -30,7 +30,7 @@ export class Game {
         this.ambientLight = this.addAmbientLight(this.scene);
         this.directionalLight = this.addDirectionalLight(this.scene);
 
-        this.resizer = new ResizeHelper(this.camera, this.renderer);
+        this.resizer = new ResizeSystem(this.camera, this.renderer);
         this.ui = new UISystem();
         this.assets = new AssetsSystem();
         this.clock = new Clock();

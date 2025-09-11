@@ -72,7 +72,6 @@ export class Level {
             level: this,
             iconPosition: new Vector3(10.5, 5.2, -2),
             slotsPositions: [
-                // new Vector3(6, 4.25, -6),
                 new Vector3(9, 4.25, -6),
                 new Vector3(11, 4.25, -6),
                 new Vector3(13, 4.25, -6),

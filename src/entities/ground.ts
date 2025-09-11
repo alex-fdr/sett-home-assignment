@@ -1,8 +1,8 @@
 import type { Game } from 'src/game';
 import type { Object3D } from 'three';
-import type { EntityProps } from './entity';
+import type { BaseEntityProps } from './base-entity';
 
-export type GroundProps = Omit<EntityProps, 'kind'>;
+export type GroundProps = Omit<BaseEntityProps, 'kind'>;
 
 export class Ground {
     public model: Object3D;

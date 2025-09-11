@@ -3,11 +3,11 @@ import { Icon } from './icon';
 import type { Game } from '../game';
 import type { ChoiceVariant } from '../systems/choices';
 import type { Level } from '../level';
-import { Animal, type AnimalKind } from './spawn/animal';
-import { Plant, type PlantKind } from './spawn/plant';
+import type { BaseEntity } from './base-entity';
+import { Animal, type AnimalKind } from './animal';
+import { Plant, type PlantKind } from './plant';
 import { Slot } from './slot';
 import { gsap } from 'gsap';
-import type { Entity } from './entity';
 
 type GardenUnitProps = {
     game: Game;
@@ -76,8 +76,6 @@ export class GardenUnit {
     }
 
     public spawnEntity(kind: EntityKind): void {
-        console.log('spawn entity', kind);
-
         for (const slot of this.slots) {
             if (!slot.isEmpty()) {
                 slot.clear();
@@ -98,25 +96,18 @@ export class GardenUnit {
     }
 
     private addAnimal(kind: AnimalKind, parent: Slot): void {
-        console.log('add animal:', kind);
-
         const animal = new Animal({
             game: this.game,
             position: new Vector3(0),
             parent,
             kind,
         });
-        // animal.model.rotateOnWorldAxis(new Vector3(0, 1, 0), Math.random() * 2 - 1);
         animal.animate('idle');
-
         this.updateable.push(animal);
-
         this.animateEntityAppearence(animal);
     }
 
     private addPlant(kind: PlantKind, parent: Slot): void {
-        console.log('add plant:', kind);
-
         const plant = new Plant({
             game: this.game,
             position: new Vector3(0),
@@ -128,7 +119,7 @@ export class GardenUnit {
         this.animateEntityAppearence(plant);
     }
 
-    private animateEntityAppearence(entity: Entity) {
+    private animateEntityAppearence(entity: BaseEntity) {
         gsap.fromTo(entity.model.scale, {
             x: 0.5,
             y: 0.5,

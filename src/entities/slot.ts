@@ -1,5 +1,5 @@
 import { Object3D, Vector3 } from 'three';
-import type { Entity } from './entity';
+import type { BaseEntity } from './base-entity';
 
 export type SlotProps = {
     position: Vector3;
@@ -7,7 +7,7 @@ export type SlotProps = {
 };
 
 export class Slot extends Object3D {
-    public entity!: Entity;
+    public entity!: BaseEntity;
 
     constructor({ position, parent }: SlotProps) {
         super();

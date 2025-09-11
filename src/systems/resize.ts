@@ -1,7 +1,7 @@
 import type { PerspectiveCamera, WebGLRenderer } from 'three';
 import { config } from '../config';
 
-export class ResizeHelper {
+export class ResizeSystem {
     public camera: PerspectiveCamera;
     public renderer: WebGLRenderer;
 

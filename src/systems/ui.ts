@@ -1,11 +1,11 @@
-import { Particles } from './particles';
+import { ParticleSystem } from './particles';
 
 export class UISystem {
     private screens: Record<string, HTMLElement> = {};
-    public particles: Particles;
+    public particles: ParticleSystem;
 
     constructor() {
-        this.particles = new Particles(200);
+        this.particles = new ParticleSystem(200);
     }
 
     public addScreen(id: string): void {

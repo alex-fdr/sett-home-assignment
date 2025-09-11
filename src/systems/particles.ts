@@ -1,6 +1,6 @@
 import { randomArray } from '../utils';
 
-export class Particles {
+export class ParticleSystem {
     public elements: HTMLDivElement[] = [];
     public parent: HTMLElement;
     public cssClasses = [
@@ -29,7 +29,7 @@ export class Particles {
         const div = document.createElement('div');
         div.style.top = `-10vh`;
         div.style.left = `${Math.random() * 100}vw`;
-        div.style.animationDuration = `${Math.random() * 4 + 4}s`;
+        div.style.animationDuration = `${Math.random() * 4 + 2}s`;
         div.style.animationDelay = `${Math.random() * 4}s`;
         div.style.scale = `${Math.random() * 0.5 + 0.5}`
         div.classList.add('particle');
