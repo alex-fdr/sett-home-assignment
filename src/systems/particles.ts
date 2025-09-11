@@ -27,7 +27,7 @@ export class ParticleSystem {
 
     private createElement(): HTMLDivElement {
         const div = document.createElement('div');
-        div.style.top = `-10vh`;
+        div.style.top = `-10vmax`;
         div.style.left = `${Math.random() * 100}vw`;
         div.style.animationDuration = `${Math.random() * 4 + 2}s`;
         div.style.animationDelay = `${Math.random() * 4}s`;
