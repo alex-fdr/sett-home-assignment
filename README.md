@@ -1,4 +1,4 @@
-This is a test exercise I've done as a part of the job interviewing process at sett.ai company
+This is a home assignment I've done as a part of the job interviewing process at sett.ai company
 
 ## Setup development environment
 `npm install`
