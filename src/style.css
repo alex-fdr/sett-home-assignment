@@ -49,12 +49,10 @@ body {
     position: absolute;
 }
 
-
 .overlay {
     background-color: black;
     opacity: 0.5;
 }
-
 
 #game-logo {
     width: 10rem;
@@ -128,7 +126,6 @@ body {
     }
 }
 
-
 .choice-list {
     display: flex;
     background: #eee;
@@ -148,23 +145,11 @@ body {
     margin: min(2vw, 2vh);
     box-sizing: border-box;
     border: 2px solid #ccc;
-    /* border-right-width: 0px; */
     border-radius: 1rem;
     background-size: contain;
     background-color: #ccc;
     cursor: pointer;
     pointer-events: all;
-}
-
-.choice-card:first-child {
-    /* border-top-left-radius: 1rem;
-    border-bottom-left-radius: 1rem; */
-}
-
-.choice-card:last-child {
-    /* border-top-right-radius: 1rem;
-    border-bottom-right-radius: 1rem;
-    border-right-width: 2px; */
 }
 
 .choice-card:hover {
@@ -329,10 +314,6 @@ body {
     10% {
         transform: scale(1.0);
     }
-/* 
-    100% {
-        transform: scale(1);
-    } */
 }
 
 .end > .overlay {
