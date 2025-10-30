@@ -1,4 +1,6 @@
-This is a home assignment I've done as a part of the job interviewing process at sett.ai company
+This is a home assignment I've done as a part of the job interviewing process at sett.ai company.
+
+[Demo link](https://alex-fdr.github.io/sett-home-assignment/)
 
 ## Setup development environment
 `npm install`
